@@ -22,7 +22,7 @@ router.get("/", async (req, res) => {
 // GET a single post
 router.get("/post/:id", async (req, res) => {
   try {
-    const postData = await Post.findByPk({
+    const postData = await Post.findByPk(req.params.id, {
       include: [
         User,
         {

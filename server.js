@@ -11,7 +11,19 @@ const SequelizeStore = require("connect-session-sequelize")(session.Store);
 const app = express();
 const PORT = process.env.PORT || 3001;
 
-const hbs = exphbs.create({ helpers });
+const hbs = exphbs.create({});
+
+app.use(
+  session({
+    secret: "nlte6q46o012xbj32d",
+    resave: false,
+    saveUninitialized: true,
+    cookie: {},
+    store: new SequelizeStore({
+      db: sequelize,
+    }),
+  })
+);
 
 app.engine("handlebars", hbs.engine);
 app.set("view engine", "handlebars");
