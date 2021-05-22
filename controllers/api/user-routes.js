@@ -39,6 +39,8 @@ router.post("/login", async (req, res) => {
     const validPw = user.checkPassword(req.body.password);
 
     req.session.save(() => {
+      req.session.username = user.username;
+      req.session.id = user.id;
       req.session.loggedIn = true;
       res.status(200).json({ user: userData, message: "You are logged in." });
     });
